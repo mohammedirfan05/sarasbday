@@ -87,6 +87,20 @@ export default function Home() {
     setPhase("intro");
   };
 
+  // Keyboard navigation for desktop testing
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (phase !== "cards") return;
+      if (e.key === "ArrowRight") {
+        handleNextCard();
+      } else if (e.key === "ArrowLeft") {
+        handlePrevCard();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [phase, currentCardIndex]);
+
   if (!isLoaded) {
     return (
       <main className="min-h-[100dvh] w-full flex items-center justify-center bg-[#141018] text-white">
@@ -156,7 +170,7 @@ export default function Home() {
           )}
 
           {phase === "final_verdict" && (
-            <div key="final_verdict" className="w-full h-full flex-1 flex flex-col overflow-y-auto">
+            <div key="final_verdict" className="w-full h-full flex-1 overflow-y-auto bg-[#FAF7F2]">
               <FinalVerdict onReplay={handleReplay} />
             </div>
           )}

@@ -75,7 +75,6 @@ export const FLAWS_DATA: FlawItem[] = [
     category: "Social Lore",
     stampVerdict: "CLASSIFIED DOSSIER",
     interactionType: "flip",
-    specialType: "spam_drawer",
     roastVariants: {
       soft: "Maintains private accounts for her inner circle.",
       medium: "Has multiple distinct spam accounts for different moods.",
@@ -433,7 +432,6 @@ export const FLAWS_DATA: FlawItem[] = [
     category: "The Secret Soft Side",
     stampVerdict: "SHORT N' SWEET ICON",
     interactionType: "stamp",
-    specialType: "sabrina_gallery",
     roastVariants: {
       soft: "Communicates via top-tier pop princess micro-reactions.",
       medium: "Her emotional vocabulary is 80% Sabrina flips, winks, micro-shrugs, and chaos.",

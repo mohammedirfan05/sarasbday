@@ -27,6 +27,13 @@ export default function FinalVerdict({ onReplay }: FinalVerdictProps) {
             clearInterval(timer);
             setCandleLit(true);
             sound.playIgnite();
+            if (typeof navigator !== "undefined" && navigator.vibrate) {
+              try {
+                navigator.vibrate([30, 60, 30]);
+              } catch {
+                // ignore
+              }
+            }
             setTimeout(() => {
               sound.playFanfare();
               fireBirthdayConfetti();
@@ -44,6 +51,13 @@ export default function FinalVerdict({ onReplay }: FinalVerdictProps) {
 
   const toggleEnvelope = (index: number) => {
     sound.playPop();
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      try {
+        navigator.vibrate(15);
+      } catch {
+        // ignore
+      }
+    }
     if (openedEnvelope === index) {
       setOpenedEnvelope(null);
     } else {
@@ -92,10 +106,10 @@ export default function FinalVerdict({ onReplay }: FinalVerdictProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.96 }}
+      initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className="relative w-full max-w-md mx-auto min-h-[100dvh] flex flex-col justify-between p-5 sm:p-6 bg-[#FAF7F2] text-[#1A1918] overflow-hidden"
+      transition={{ duration: 0.4 }}
+      className="relative w-full max-w-md mx-auto p-4 sm:p-6 pb-24 bg-[#FAF7F2] text-[#1A1918] flex flex-col gap-4"
     >
       {/* Top Banner */}
       <div className="text-center pb-4 border-b border-[#E2DDD5]">
@@ -298,7 +312,7 @@ export default function FinalVerdict({ onReplay }: FinalVerdictProps) {
           className="flex items-center gap-1.5 text-xs font-mono text-[#5A5752] hover:text-[#1A1918] transition-colors cursor-pointer py-1"
         >
           <RotateCcw className="w-3.5 h-3.5" />
-          <span>Replay The 30 Flaws Appeal</span>
+          <span>Replay The Flaws Appeal</span>
         </button>
 
         <span className="font-mono text-[10px] text-[#8A857D] flex items-center gap-1">

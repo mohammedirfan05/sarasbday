@@ -39,6 +39,17 @@ export default function AppealCard({
   const [isHolding, setIsHolding] = useState(false);
   const [shakeCard, setShakeCard] = useState(false);
 
+  // Haptic feedback helper
+  const triggerHaptic = (ms = 15) => {
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      try {
+        navigator.vibrate(ms);
+      } catch {
+        // ignore
+      }
+    }
+  };
+
   useEffect(() => {
     setIsFlipped(isDismissed);
   }, [isDismissed, flaw.id]);
@@ -46,6 +57,7 @@ export default function AppealCard({
   // Handle stamp slam
   const handleStampSlam = () => {
     sound.playStamp();
+    triggerHaptic(20);
     setShakeCard(true);
     setTimeout(() => setShakeCard(false), 300);
     setIsFlipped(true);
@@ -55,6 +67,7 @@ export default function AppealCard({
   // Handle 3D Flip
   const handleFlipToggle = () => {
     sound.playClick();
+    triggerHaptic(15);
     const nextState = !isFlipped;
     setIsFlipped(nextState);
     if (nextState && !isDismissed) {
@@ -64,6 +77,7 @@ export default function AppealCard({
 
   // Handle Scratch Reveal
   const handleScratchReveal = () => {
+    triggerHaptic(20);
     setIsFlipped(true);
     onDismiss(flaw.id);
   };
@@ -88,6 +102,16 @@ export default function AppealCard({
     }
   }, [holdProgress, isFlipped]);
 
+  const washiColors = [
+    "bg-amber-200/80 border-amber-300/60",
+    "bg-rose-200/80 border-rose-300/60",
+    "bg-emerald-200/80 border-emerald-300/60",
+    "bg-purple-200/80 border-purple-300/60",
+  ];
+  const tapeStyle = washiColors[flaw.id % washiColors.length];
+  const stampRotation = ((flaw.id * 7) % 7) - 3;
+  const isLastCase = currentIndex === totalCards - 1;
+
   return (
     <div className="relative w-full max-w-md mx-auto flex flex-col justify-between py-2 px-1">
       {/* Top Docket Bar */}
@@ -102,20 +126,32 @@ export default function AppealCard({
         </span>
       </div>
 
-      {/* Main Physical Scrapbook Card */}
+      {/* Main Physical Scrapbook Card with Swipe Gestures */}
       <motion.div
         key={flaw.id}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.15}
+        onDragEnd={(_e, info) => {
+          if (info.offset.x < -50 && canNext) {
+            sound.playClick();
+            onNext();
+          } else if (info.offset.x > 50 && canPrev) {
+            sound.playClick();
+            onPrev();
+          }
+        }}
         initial={{ scale: 0.95, opacity: 0, y: 15 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.95, opacity: 0, y: -15 }}
         transition={{ type: "spring", stiffness: 260, damping: 24 }}
-        className={`relative w-full rounded-2xl scrapbook-paper text-[#1A1918] p-5 sm:p-6 overflow-hidden transition-transform ${
+        className={`relative w-full rounded-2xl scrapbook-paper text-[#1A1918] p-5 sm:p-6 overflow-hidden transition-transform shadow-2xl touch-pan-y ${
           shakeCard ? "animate-screen-shake" : ""
         }`}
       >
-        {/* Tape Strips at Corners for Scrapbook Aesthetic */}
-        <div className="absolute -top-3 left-8 w-16 h-6 bg-amber-200/70 -rotate-6 border border-amber-300/50 shadow-sm pointer-events-none" />
-        <div className="absolute -top-3 right-8 w-16 h-6 bg-amber-200/70 rotate-6 border border-amber-300/50 shadow-sm pointer-events-none" />
+        {/* Tape Strips at Corners with Dynamic Color Palette */}
+        <div className={`absolute -top-3 left-8 w-16 h-6 ${tapeStyle} -rotate-6 border shadow-sm pointer-events-none`} />
+        <div className={`absolute -top-3 right-8 w-16 h-6 ${tapeStyle} rotate-6 border shadow-sm pointer-events-none`} />
 
         {/* Scratch Card Overlay if applicable */}
         {flaw.interactionType === "scratch" && !isDismissed && (
@@ -216,15 +252,23 @@ export default function AppealCard({
               transition={{ duration: 0.35 }}
               className="mt-4 pt-4 border-t border-[#E2DDD5]"
             >
-              {/* Rubber Stamp Slam Badge */}
+              {/* Rubber Stamp Slam Badge with Deterministic Tilt */}
               <div className="mb-3">
-                <span className="court-stamp animate-stamp-slam text-xs text-[#2D6A4F] border-[#2D6A4F] bg-emerald-50/50">
+                <span
+                  style={{ transform: `rotate(${stampRotation}deg)` }}
+                  className="inline-block court-stamp animate-stamp-slam text-xs text-[#2D6A4F] border-[#2D6A4F] bg-emerald-50/50"
+                >
                   {flaw.stampVerdict}
                 </span>
               </div>
 
               {/* Tender Why Section */}
-              <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 mb-2">
+              <motion.div
+                initial={{ scale: 0.97, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 mb-2"
+              >
                 <span className="font-mono text-[9px] uppercase font-bold text-amber-900 tracking-wider flex items-center gap-1 mb-1">
                   <Heart className="w-3 h-3 text-rose-500 fill-rose-500" />
                   <span>Why This Makes You Irreplaceable:</span>
@@ -232,7 +276,7 @@ export default function AppealCard({
                 <p className="font-handwritten text-xl sm:text-2xl text-[#1A1918] leading-tight font-bold">
                   &ldquo;{flaw.why}&rdquo;
                 </p>
-              </div>
+              </motion.div>
 
               {/* Special interactive exhibits if configured */}
               {flaw.specialType && <SpecialExhibits type={flaw.specialType} />}
@@ -262,18 +306,32 @@ export default function AppealCard({
           <span>Prev Case</span>
         </button>
 
-        <button
-          onClick={() => {
-            sound.playClick();
-            onNext();
-          }}
-          disabled={!canNext}
-          aria-label="Next case"
-          className="flex-1 py-3 px-4 rounded-xl bg-[#FAF7F2] hover:bg-white active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-[#1A1918] text-xs font-mono font-bold tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-lg"
-        >
-          <span>Next Case</span>
-          <ArrowRight className="w-3.5 h-3.5 text-[#E05A47]" />
-        </button>
+        {isLastCase ? (
+          <button
+            onClick={() => {
+              sound.playClick();
+              onNext();
+            }}
+            aria-label="Proceed to Supreme Verdict"
+            className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-300 via-amber-200 to-rose-200 hover:from-amber-200 hover:to-rose-100 active:scale-95 text-[#1A1918] text-xs font-mono font-bold tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-lg shadow-amber-400/25 border border-amber-300"
+          >
+            <span>Proceed to Supreme Verdict ⚖️</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#E05A47]" />
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              sound.playClick();
+              onNext();
+            }}
+            disabled={!canNext}
+            aria-label="Next case"
+            className="flex-1 py-3 px-4 rounded-xl bg-[#FAF7F2] hover:bg-white active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-[#1A1918] text-xs font-mono font-bold tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-lg"
+          >
+            <span>Next Case</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#E05A47]" />
+          </button>
+        )}
       </div>
     </div>
   );

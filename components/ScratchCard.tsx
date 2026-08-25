@@ -115,6 +115,13 @@ export default function ScratchCard({
       if (ratio > 0.36) {
         setIsCleared(true);
         sound.playStamp();
+        if (typeof navigator !== "undefined" && navigator.vibrate) {
+          try {
+            navigator.vibrate(20);
+          } catch {
+            // ignore
+          }
+        }
         onReveal();
       }
     } catch {
