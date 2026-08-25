@@ -450,5 +450,5 @@ export const OBJECTIONS_DATA = [
   "Objection! Court notes that her 12:00 PM wake-up time was strictly prescribed beauty rest.",
   "Objection! The AI water consumption argument was dismissed due to overwhelming charm.",
   "Objection! The prosecution concedes that her standards are entirely justified.",
-  "Objection! Court finds no evidence of flaws—only premium character traits."
+  "Objection! Court finds no evidence of flaws, only premium character traits."
 ];

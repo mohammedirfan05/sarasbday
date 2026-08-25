@@ -133,7 +133,7 @@ export default function FinalVerdict({ onReplay }: FinalVerdictProps) {
         </div>
 
         <p className="font-sans text-sm sm:text-base text-[#1A1918] leading-relaxed font-medium mt-1">
-          &ldquo;You’re honestly just one of those people who makes life more fun by being exactly who you are. The random shit, the stubborn moments, the little things you care about — somehow it all just makes you, you. And I wouldn’t change that.&rdquo;
+          &ldquo;You’re honestly just one of those people who makes life more fun by being exactly who you are. The random shit, the stubborn moments, the little things you care about, somehow it all just makes you, you. And I wouldn’t change that.&rdquo;
         </p>
       </div>
 

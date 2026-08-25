@@ -214,8 +214,8 @@ export default function AppealCard({
           </AnimatePresence>
 
           {/* Tape Strips at Corners */}
-          <div className={`absolute -top-3 left-8 w-16 h-6 ${tapeStyle} -rotate-6 border shadow-sm pointer-events-none`} />
-          <div className={`absolute -top-3 right-8 w-16 h-6 ${tapeStyle} rotate-6 border shadow-sm pointer-events-none`} />
+          <div className={`absolute -top-2.5 left-8 w-16 h-5 ${tapeStyle} washi-strip -rotate-6 border shadow-xs pointer-events-none`} />
+          <div className={`absolute -top-2.5 right-8 w-16 h-5 ${tapeStyle} washi-strip rotate-6 border shadow-xs pointer-events-none`} />
 
           {/* Scratch Card Overlay if applicable */}
           {flaw.interactionType === "scratch" && !isDismissed && (
@@ -319,7 +319,7 @@ export default function AppealCard({
               <div className="mb-3">
                 <span
                   style={{ transform: `rotate(${stampRotation}deg)` }}
-                  className="inline-block court-stamp animate-stamp-slam text-xs text-[#2D6A4F] border-[#2D6A4F] bg-emerald-50/50"
+                  className="inline-block court-stamp animate-stamp-slam text-xs text-[#2D6A4F] border-[#2D6A4F] bg-emerald-50/70"
                 >
                   {flaw.stampVerdict}
                 </span>
@@ -330,9 +330,9 @@ export default function AppealCard({
                 initial={{ scale: 0.97, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 220, damping: 20 }}
-                className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 mb-2"
+                className="p-4 rounded-xl bg-[#FFF9F0] border border-[#EED7B5] shadow-xs mb-2 relative overflow-hidden"
               >
-                <span className="font-mono text-[9px] uppercase font-bold text-amber-900 tracking-wider flex items-center gap-1 mb-1">
+                <span className="font-mono text-[9px] uppercase font-bold text-amber-900 tracking-wider flex items-center gap-1.5 mb-1.5">
                   <Heart className="w-3 h-3 text-rose-500 fill-rose-500" />
                   <span>Why This Makes You Irreplaceable:</span>
                 </span>
@@ -384,8 +384,8 @@ export default function AppealCard({
             </AnimatePresence>
 
             {/* Tape Strips at Corners */}
-            <div className={`absolute -top-3 left-8 w-16 h-6 ${tapeStyle} -rotate-6 border shadow-sm pointer-events-none`} />
-            <div className={`absolute -top-3 right-8 w-16 h-6 ${tapeStyle} rotate-6 border shadow-sm pointer-events-none`} />
+            <div className={`absolute -top-2.5 left-8 w-16 h-5 ${tapeStyle} washi-strip -rotate-6 border shadow-xs pointer-events-none`} />
+            <div className={`absolute -top-2.5 right-8 w-16 h-5 ${tapeStyle} washi-strip rotate-6 border shadow-xs pointer-events-none`} />
 
             <div>
               {/* Category & Dismissed Badges with Flip Back trigger */}
@@ -407,15 +407,15 @@ export default function AppealCard({
               <div className="mb-3">
                 <span
                   style={{ transform: `rotate(${stampRotation}deg)` }}
-                  className="inline-block court-stamp animate-stamp-slam text-xs text-[#2D6A4F] border-[#2D6A4F] bg-emerald-50/50"
+                  className="inline-block court-stamp animate-stamp-slam text-xs text-[#2D6A4F] border-[#2D6A4F] bg-emerald-50/70"
                 >
                   {flaw.stampVerdict}
                 </span>
               </div>
 
               {/* Tender Why Section */}
-              <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 mb-2">
-                <span className="font-mono text-[9px] uppercase font-bold text-amber-900 tracking-wider flex items-center gap-1 mb-1">
+              <div className="p-4 rounded-xl bg-[#FFF9F0] border border-[#EED7B5] shadow-xs mb-2 relative overflow-hidden">
+                <span className="font-mono text-[9px] uppercase font-bold text-amber-900 tracking-wider flex items-center gap-1.5 mb-1.5">
                   <Heart className="w-3 h-3 text-rose-500 fill-rose-500" />
                   <span>Why This Makes You Irreplaceable:</span>
                 </span>

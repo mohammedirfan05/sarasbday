@@ -48,28 +48,36 @@
 
 /* Scrapbook Parchment Paper Card */
 .scrapbook-paper {
-  background-color: #FAF7F2;
+  background-color: #FAF8F5;
   background-image: 
-    radial-gradient(#E8E2D5 0.75px, transparent 0.75px),
-    radial-gradient(#E8E2D5 0.75px, #FAF7F2 0.75px);
-  background-size: 30px 30px;
-  background-position: 0 0, 15px 15px;
+    radial-gradient(#DFD8CB 0.75px, transparent 0.75px),
+    radial-gradient(#DFD8CB 0.75px, #FAF8F5 0.75px);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
   box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.05),
-    0 15px 35px -5px rgba(24, 18, 12, 0.15),
-    inset 0 0 0 1px rgba(210, 200, 185, 0.4);
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 16px 36px -6px rgba(24, 18, 12, 0.18),
+    inset 0 0 0 1px rgba(215, 205, 190, 0.5);
 }
 
-/* Stamp Effect */
+/* Washi Tape Ribbon Effect */
+.washi-strip {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  mask-image: linear-gradient(90deg, transparent 0%, black 4%, black 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 4%, black 96%, transparent 100%);
+}
+
+/* Stamp Effect with Authentic Distressed Edge */
 .court-stamp {
   display: inline-block;
   text-transform: uppercase;
   font-weight: 800;
-  letter-spacing: 0.12em;
-  border-width: 3px;
+  letter-spacing: 0.14em;
+  border-width: 2.5px;
   border-style: solid;
-  border-radius: 6px;
-  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  padding: 0.3rem 0.85rem;
   mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
@@ -78,14 +86,14 @@
 @keyframes stampSlam {
   0% {
     opacity: 0;
-    transform: scale(2.6) rotate(-15deg);
+    transform: scale(2.4) rotate(-12deg);
   }
-  65% {
+  60% {
     opacity: 1;
-    transform: scale(0.92) rotate(4deg);
+    transform: scale(0.94) rotate(3deg);
   }
   85% {
-    transform: scale(1.04) rotate(-2deg);
+    transform: scale(1.02) rotate(-1deg);
   }
   100% {
     transform: scale(1) rotate(0deg);
