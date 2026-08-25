@@ -152,16 +152,19 @@ export default function ScratchCard({
   };
 
   const handlePointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    e.stopPropagation();
     isDrawing.current = true;
     scratch(e.clientX, e.clientY);
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    e.stopPropagation();
     if (!isDrawing.current) return;
     scratch(e.clientX, e.clientY);
   };
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (e?: React.PointerEvent<HTMLCanvasElement>) => {
+    if (e) e.stopPropagation();
     if (isDrawing.current) {
       isDrawing.current = false;
       checkScratchPercentage();

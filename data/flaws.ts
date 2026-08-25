@@ -1,5 +1,5 @@
 export type InteractionType = "scratch" | "flip" | "stamp" | "hold";
-export type SpecialType = "spam_drawer" | "movie_strip" | "ai_water" | "noon_alarm" | "snap_score" | "sabrina_gallery";
+export type SpecialType = "ai_water" | "noon_alarm" | "snap_score" | "lash_flutter" | "gaslight_meter";
 
 export interface FlawItem {
   id: number;
@@ -74,7 +74,7 @@ export const FLAWS_DATA: FlawItem[] = [
     original: "Has multiple spam accounts (4+)",
     category: "Social Lore",
     stampVerdict: "CLASSIFIED DOSSIER",
-    interactionType: "flip",
+    interactionType: "stamp",
     roastVariants: {
       soft: "Maintains private accounts for her inner circle.",
       medium: "Has multiple distinct spam accounts for different moods.",
@@ -91,7 +91,6 @@ export const FLAWS_DATA: FlawItem[] = [
     category: "Daily Habits",
     stampVerdict: "CINEMA CERTIFIED",
     interactionType: "scratch",
-    specialType: "movie_strip",
     roastVariants: {
       soft: "Just a casual cinematic deep dive.",
       medium: "Will sit down and knock out movie after movie before realizing the sun went down.",
@@ -107,7 +106,7 @@ export const FLAWS_DATA: FlawItem[] = [
     original: "Still stalks their ex but lies to themselves",
     category: "The Secret Soft Side",
     stampVerdict: "CASE EXPUNGED",
-    interactionType: "flip",
+    interactionType: "scratch",
     roastVariants: {
       soft: "Routine historical research check.",
       medium: "Says 'I literally don't care at all' while checking in anyway.",
@@ -238,6 +237,7 @@ export const FLAWS_DATA: FlawItem[] = [
     category: "Personality Crimes",
     stampVerdict: "CHIEF DEFENSE ATTY",
     interactionType: "hold",
+    specialType: "gaslight_meter",
     roastVariants: {
       soft: "Re-edits the narrative in real time with incredible confidence.",
       medium: "Will drop a glass and somehow convince you that gravity was your fault.",
@@ -253,7 +253,7 @@ export const FLAWS_DATA: FlawItem[] = [
     original: "Dry replies / mood swings",
     category: "The Secret Soft Side",
     stampVerdict: "DYNAMIC WEATHER",
-    interactionType: "flip",
+    interactionType: "hold",
     roastVariants: {
       soft: "Has distinct communicative weather systems.",
       medium: "Either replies with 6 voice notes and 12 photos or just sends 'k' and vanishes for 8 hours.",
@@ -350,7 +350,7 @@ export const FLAWS_DATA: FlawItem[] = [
     original: "Thinks AI consumes all the water",
     category: "Personality Crimes",
     stampVerdict: "ECO CONSCIOUS",
-    interactionType: "flip",
+    interactionType: "stamp",
     specialType: "ai_water",
     roastVariants: {
       soft: "Monitoring data center cooling ethics.",
@@ -367,7 +367,7 @@ export const FLAWS_DATA: FlawItem[] = [
     original: "Hates marriage",
     category: "Personality Crimes",
     stampVerdict: "DYNASTY PROTOCOL",
-    interactionType: "flip",
+    interactionType: "stamp",
     roastVariants: {
       soft: "Values absolute sovereign freedom.",
       medium: "Looks at wedding Pinterest boards with mild biological disgust.",
@@ -400,6 +400,7 @@ export const FLAWS_DATA: FlawItem[] = [
     category: "Aesthetic Rules",
     stampVerdict: "HIGH GLAMOUR",
     interactionType: "scratch",
+    specialType: "lash_flutter",
     roastVariants: {
       soft: "Elevates visual presentation with precision lash engineering.",
       medium: "One blink and she creates a gentle localized breeze in the room.",
@@ -415,7 +416,7 @@ export const FLAWS_DATA: FlawItem[] = [
     original: "Has their spam account mentioned in their main",
     category: "Social Lore",
     stampVerdict: "OPEN SECRET",
-    interactionType: "flip",
+    interactionType: "hold",
     roastVariants: {
       soft: "A transparent doorway to her private diary.",
       medium: "Puts the secret password in neon lights on the front porch.",
