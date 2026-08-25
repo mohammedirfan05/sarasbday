@@ -156,6 +156,7 @@ export default function Home() {
 
               {/* Individual Flaw Card */}
               <AppealCard
+                key={currentFlaw.id}
                 flaw={currentFlaw}
                 currentIndex={currentCardIndex}
                 totalCards={FLAWS_DATA.length}

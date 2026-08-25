@@ -56,7 +56,7 @@ export default function FinalVerdict({ onReplay }: FinalVerdictProps) {
     sound.playClick();
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(
-        "Official Judicial Verdict: Sara has been acquitted of all 30 flaws and is hereby declared 100% Iconic & Irreplaceable! Happy Birthday!"
+        "Official Judicial Verdict: Sara has been acquitted of all flaws and is hereby declared 100% Iconic & Irreplaceable! Happy Birthday!"
       );
       setCopiedBadge(true);
       setTimeout(() => setCopiedBadge(false), 2500);
@@ -66,11 +66,11 @@ export default function FinalVerdict({ onReplay }: FinalVerdictProps) {
   const envelopes = [
     {
       id: 1,
-      title: "Things I Tease You For",
+      title: "Things I Love About You",
       seal: "EXHIBIT 1",
-      preview: "The 12 PM alarms, spam accounts, and man-hater propaganda...",
+      preview: "Your late wakeups, your secret little spam accounts, your specific opinions...",
       content:
-        "Your 12:00 PM sleep schedules, having 4 spam accounts with user020306767 permanently memorized, your unyielding man-hater rhetoric while collecting guy best friends, and your theory that AI is drinking all the freshwater. You make teasing an absolute Olympic sport.",
+        "Your late wakeups, your secret little spam accounts, your very specific opinions, and the random shit you somehow get invested in. And somehow, that’s exactly what makes you so easy to love and impossible to replace.",
     },
     {
       id: 2,
@@ -86,7 +86,7 @@ export default function FinalVerdict({ onReplay }: FinalVerdictProps) {
       seal: "FINAL NOTE",
       preview: "The sincere, tender truth behind this website...",
       content:
-        "Happy Late Birthday, Sara. I am truly sorry for making that Instagram story too sharp. The joke got dumb, but building this site was the only way I knew how to fix it properly: by proving that every single one of those 30 things is actually a reason you are deeply valued, admired, and irreplaceable. Wishing you an iconic year ahead filled with good movies, zero annoying alarms, and everything you deserve.",
+        "Happy Late Birthday, Sara. I am truly sorry for making that Instagram story too random and weird. The joke got dumb, but building this site was the only way I knew how to fix it properly: by proving that every single one of those things is actually a reason you are deeply valued, admired, and irreplaceable. Wishing you an iconic year ahead filled with good movies, zero annoying fake friends, and everything you deserve, idk how to explain but i just love u so fucking much more than i could to anyone .",
     },
   ];
 
@@ -119,7 +119,7 @@ export default function FinalVerdict({ onReplay }: FinalVerdictProps) {
         </div>
 
         <p className="font-sans text-sm sm:text-base text-[#1A1918] leading-relaxed font-medium mt-1">
-          &ldquo;You are not your flaws. You are the way even your most chaotic, sarcastic, and unhinged habits somehow make the whole person brighter, funnier, and completely irreplaceable.&rdquo;
+          &ldquo;You’re honestly just one of those people who makes life more fun by being exactly who you are. The random shit, the stubborn moments, the little things you care about — somehow it all just makes you, you. And I wouldn’t change that.&rdquo;
         </p>
       </div>
 

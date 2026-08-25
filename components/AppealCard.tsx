@@ -68,25 +68,25 @@ export default function AppealCard({
     onDismiss(flaw.id);
   };
 
-  // Handle Hold to Testify
+  // Handle Hold to Testify progress
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (isHolding && !isFlipped) {
+    if (isHolding && !isFlipped && holdProgress < 100) {
       timer = setInterval(() => {
-        setHoldProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(timer);
-            handleStampSlam();
-            return 100;
-          }
-          return prev + 5;
-        });
+        setHoldProgress((prev) => Math.min(100, prev + 5));
       }, 35);
-    } else {
+    } else if (!isHolding && holdProgress < 100) {
       setHoldProgress(0);
     }
     return () => clearInterval(timer);
-  }, [isHolding, isFlipped]);
+  }, [isHolding, isFlipped, holdProgress]);
+
+  // When hold progress completes, trigger slam safely outside of render/reducer
+  useEffect(() => {
+    if (holdProgress >= 100 && !isFlipped) {
+      handleStampSlam();
+    }
+  }, [holdProgress, isFlipped]);
 
   const activeRoast = flaw.roastVariants[tone] || flaw.roastVariants.medium;
 
@@ -206,20 +206,6 @@ export default function AppealCard({
                       : "Hold Thumb to Testify"}
                   </span>
                 </span>
-              </button>
-            )}
-
-            {flaw.interactionType === "special" && (
-              <button
-                onClick={() => {
-                  sound.playStamp();
-                  setIsFlipped(true);
-                  onDismiss(flaw.id);
-                }}
-                className="w-full py-3.5 px-4 rounded-xl bg-[#2D6A4F] hover:bg-[#24543F] active:scale-95 text-white font-display font-bold text-xs tracking-wider uppercase shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4 text-amber-300" />
-                <span>Open Special Evidence Exhibit</span>
               </button>
             )}
 

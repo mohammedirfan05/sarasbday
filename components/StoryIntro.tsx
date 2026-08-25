@@ -90,7 +90,7 @@ export default function StoryIntro({ onProceed }: StoryIntroProps) {
           transition={{ delay: 0.2 }}
           className="font-display text-3xl sm:text-4xl font-black tracking-tight leading-[1.1] mb-2 text-white drop-shadow-md"
         >
-          The 30 Flaws <br />
+          The Flaws <br />
           <span className="bg-gradient-to-r from-amber-200 via-rose-200 to-pink-200 bg-clip-text text-transparent italic">
             Appeal Court
           </span>
@@ -102,7 +102,7 @@ export default function StoryIntro({ onProceed }: StoryIntroProps) {
           transition={{ delay: 0.3 }}
           className="text-xs sm:text-sm text-white/85 max-w-[32ch] font-sans leading-relaxed mb-4"
         >
-          Before August 20, I posted 30 flaws as ragebait. Here is the official judicial re-trial where every roast turns into proof you&apos;re irreplaceable.
+          Before August 20, I posted your flaws as ragebait. Here is the official judicial re-trial where every roast turns into proof you&apos;re irreplaceable.
         </motion.p>
 
         {/* Polaroid Scrapbook Sticker */}
