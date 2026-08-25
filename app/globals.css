@@ -117,33 +117,53 @@
   animation: screenShake 0.28s ease-out;
 }
 
-/* Candle flame flicker */
+/* Candle flame flicker with realistic heat bloom */
 @keyframes flameFlicker {
   0%, 100% {
-    transform: scale(1) rotate(-1deg);
-    opacity: 0.95;
-    filter: drop-shadow(0 0 12px rgba(255, 180, 50, 0.85));
+    transform: scale(1, 1) rotate(-1deg);
+    filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.85)) drop-shadow(0 0 22px rgba(245, 158, 11, 0.55));
   }
-  25% {
-    transform: scale(1.08, 0.95) rotate(2deg);
-    opacity: 1;
-    filter: drop-shadow(0 0 18px rgba(255, 150, 30, 0.95));
+  20% {
+    transform: scale(0.96, 1.05) rotate(1.5deg);
+    filter: drop-shadow(0 0 14px rgba(251, 191, 36, 0.95)) drop-shadow(0 0 28px rgba(245, 158, 11, 0.65));
   }
-  50% {
-    transform: scale(0.96, 1.05) rotate(-2deg);
-    opacity: 0.9;
-    filter: drop-shadow(0 0 10px rgba(255, 200, 80, 0.8));
+  40% {
+    transform: scale(1.04, 0.95) rotate(-1.5deg);
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.75)) drop-shadow(0 0 18px rgba(245, 158, 11, 0.45));
   }
-  75% {
-    transform: scale(1.04, 1.02) rotate(1deg);
-    opacity: 1;
-    filter: drop-shadow(0 0 16px rgba(255, 170, 40, 0.9));
+  60% {
+    transform: scale(0.98, 1.03) rotate(1deg);
+    filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.95)) drop-shadow(0 0 30px rgba(245, 158, 11, 0.7));
+  }
+  80% {
+    transform: scale(1.02, 0.98) rotate(-0.5deg);
+    filter: drop-shadow(0 0 11px rgba(251, 191, 36, 0.85)) drop-shadow(0 0 22px rgba(245, 158, 11, 0.5));
   }
 }
 
 .animate-flame {
-  animation: flameFlicker 1.4s ease-in-out infinite;
+  animation: flameFlicker 1.8s ease-in-out infinite;
   transform-origin: bottom center;
+}
+
+/* Wispy candle smoke trail */
+@keyframes smokeTrail {
+  0% {
+    opacity: 0.8;
+    transform: translateY(0) scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateY(-16px) scale(1.4) rotate(8deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-32px) scale(2) rotate(-10deg);
+  }
+}
+
+.animate-smoke {
+  animation: smokeTrail 1.5s ease-out forwards;
 }
 
 /* Water wave shimmer */
