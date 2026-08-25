@@ -88,8 +88,6 @@ export default function AppealCard({
     }
   }, [holdProgress, isFlipped]);
 
-  const activeRoast = flaw.roastVariants[tone] || flaw.roastVariants.medium;
-
   return (
     <div className="relative w-full max-w-md mx-auto flex flex-col justify-between py-2 px-1">
       {/* Top Docket Bar */}
@@ -154,14 +152,6 @@ export default function AppealCard({
           <h3 className="font-display font-black text-xl sm:text-2xl text-[#1A1918] tracking-tight leading-snug">
             &ldquo;{flaw.original}&rdquo;
           </h3>
-
-          {/* Roast Subtext */}
-          <div className="mt-2.5 p-3 rounded-xl bg-black/5 border-l-3 border-[#E05A47] text-xs font-sans text-[#3A3835] leading-relaxed">
-            <span className="font-mono text-[9px] uppercase font-bold text-[#8A857D] block mb-0.5">
-              Court Prosecution Note:
-            </span>
-            {activeRoast}
-          </div>
         </div>
 
         {/* Interaction Trigger Area if not yet revealed */}
@@ -231,16 +221,6 @@ export default function AppealCard({
                 <span className="court-stamp animate-stamp-slam text-xs text-[#2D6A4F] border-[#2D6A4F] bg-emerald-50/50">
                   {flaw.stampVerdict}
                 </span>
-              </div>
-
-              {/* Judicial Translation */}
-              <div className="mb-3">
-                <span className="font-mono text-[10px] uppercase font-bold text-[#5A5752] tracking-wider block mb-1">
-                  ACTUAL JUDICIAL TRANSLATION
-                </span>
-                <p className="font-sans text-sm sm:text-base font-semibold text-[#1A1918] leading-relaxed">
-                  {flaw.translation}
-                </p>
               </div>
 
               {/* Tender Why Section */}

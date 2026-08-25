@@ -5,20 +5,19 @@ import { AnimatePresence } from "framer-motion";
 import { FLAWS_DATA } from "@/data/flaws";
 import { loadProgress, saveProgress, RoastTone } from "@/lib/storage";
 import StoryIntro from "@/components/StoryIntro";
-import ToneGate from "@/components/ToneGate";
 import AppealCard from "@/components/AppealCard";
 import ProgressDocket from "@/components/ProgressDocket";
 import FinalVerdict from "@/components/FinalVerdict";
 import SoundToggle from "@/components/SoundToggle";
 import ObjectionButton from "@/components/ObjectionButton";
 
-type AppPhase = "intro" | "tone_gate" | "cards" | "final_verdict";
+type AppPhase = "intro" | "cards" | "final_verdict";
 
 export default function Home() {
   const [phase, setPhase] = useState<AppPhase>("intro");
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [dismissedCardIds, setDismissedCardIds] = useState<number[]>([]);
-  const [tone, setTone] = useState<RoastTone>("medium");
+  const [tone] = useState<RoastTone>("medium");
   const [interludeMilestone, setInterludeMilestone] = useState<number | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -32,9 +31,6 @@ export default function Home() {
       if (saved.currentCardIndex !== undefined) {
         setCurrentCardIndex(saved.currentCardIndex);
       }
-      if (saved.tone) {
-        setTone(saved.tone);
-      }
       if (saved.hasSeenIntro) {
         setPhase("cards");
       }
@@ -43,17 +39,8 @@ export default function Home() {
   }, []);
 
   const handleProceedFromIntro = () => {
-    setPhase("tone_gate");
-  };
-
-  const handleSelectTone = (selectedTone: RoastTone) => {
-    setTone(selectedTone);
     setPhase("cards");
-    saveProgress({ tone: selectedTone, hasSeenIntro: true });
-  };
-
-  const handleSkipToVerdict = () => {
-    setPhase("final_verdict");
+    saveProgress({ hasSeenIntro: true });
   };
 
   const handleDismissCard = (flawId: number) => {
@@ -132,42 +119,36 @@ export default function Home() {
             <StoryIntro key="intro" onProceed={handleProceedFromIntro} />
           )}
 
-          {phase === "tone_gate" && (
-            <div key="tone_gate" className="w-full h-full flex-1 flex flex-col overflow-y-auto">
-              <ToneGate
-                initialTone={tone}
-                onSelectTone={handleSelectTone}
-                onSkipToVerdict={handleSkipToVerdict}
-              />
-            </div>
-          )}
-
           {phase === "cards" && (
-            <div key="cards" className="w-full h-full flex-1 flex flex-col justify-between p-3 sm:p-4 bg-story-gradient overflow-y-auto">
+            <div key="cards" className="w-full h-full flex-1 flex flex-col p-3 sm:p-4 bg-story-gradient overflow-y-auto min-h-0">
               {/* Progress & Milestone Map */}
-              <ProgressDocket
-                totalCards={FLAWS_DATA.length}
-                currentIndex={currentCardIndex}
-                dismissedCardIds={dismissedCardIds}
-                onSelectCard={handleSelectCardFromDocket}
-                interludeMilestone={interludeMilestone}
-                onDismissMilestone={() => setInterludeMilestone(null)}
-              />
+              <div className="w-full flex-shrink-0 pt-1 pb-1">
+                <ProgressDocket
+                  totalCards={FLAWS_DATA.length}
+                  currentIndex={currentCardIndex}
+                  dismissedCardIds={dismissedCardIds}
+                  onSelectCard={handleSelectCardFromDocket}
+                  interludeMilestone={interludeMilestone}
+                  onDismissMilestone={() => setInterludeMilestone(null)}
+                />
+              </div>
 
-              {/* Individual Flaw Card */}
-              <AppealCard
-                key={currentFlaw.id}
-                flaw={currentFlaw}
-                currentIndex={currentCardIndex}
-                totalCards={FLAWS_DATA.length}
-                tone={tone}
-                isDismissed={isCurrentDismissed}
-                onDismiss={handleDismissCard}
-                onNext={handleNextCard}
-                onPrev={handlePrevCard}
-                canPrev={currentCardIndex > 0}
-                canNext={true}
-              />
+              {/* Individual Flaw Card - Vertically Centered */}
+              <div className="w-full flex-1 flex flex-col justify-center items-center my-auto min-h-0 py-2">
+                <AppealCard
+                  key={currentFlaw.id}
+                  flaw={currentFlaw}
+                  currentIndex={currentCardIndex}
+                  totalCards={FLAWS_DATA.length}
+                  tone={tone}
+                  isDismissed={isCurrentDismissed}
+                  onDismiss={handleDismissCard}
+                  onNext={handleNextCard}
+                  onPrev={handlePrevCard}
+                  canPrev={currentCardIndex > 0}
+                  canNext={true}
+                />
+              </div>
 
               {/* Floating Courtroom Gavel Objection Button */}
               <ObjectionButton />

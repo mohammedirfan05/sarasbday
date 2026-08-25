@@ -102,7 +102,7 @@ export default function StoryIntro({ onProceed }: StoryIntroProps) {
           transition={{ delay: 0.3 }}
           className="text-xs sm:text-sm text-white/85 max-w-[32ch] font-sans leading-relaxed mb-4"
         >
-          Before August 20, I posted your flaws as ragebait. Here is the official judicial re-trial where every roast turns into proof you&apos;re irreplaceable.
+          On August 20, I posted your flaws as ragebait. Here is the official judicial retrial.
         </motion.p>
 
         {/* Polaroid Scrapbook Sticker */}
